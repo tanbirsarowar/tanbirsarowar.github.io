@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanbir Sarowar | Research Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ──────────────────── DESIGN TOKENS ──────────────────── */
+    :root {
+      --maroon:       #6b0f0f;
+      --maroon-light: #8b2222;
+      --maroon-pale:  #faf0f0;
+      --maroon-tint:  rgba(107,15,15,.10);
+      --sky-deep:     #1a5f96;
+      --sky:          #2d80c0;
+      --sky-light:    #ddeef8;
+      --sky-pale:     #f0f7fc;
+      /* legacy aliases (kept so all var(--navy) references update automatically) */
+      --navy:         #1a5f96;
+      --navy-mid:     #2d80c0;
+      --gold:         #c89b3c;
+      --gold-light:   #e8c870;
+      --white:        #ffffff;
+      --off-white:    #f8fafc;
+      --gray-100:     #edf3f8;
+      --gray-200:     #d4e0eb;
+      --gray-600:     #5a6e82;
+      --gray-800:     #2c3a48;
+      --text:         #1a2530;
+      --accent-blue:  #2563eb;
+      --accent-teal:  #0d7377;
+      --radius:       15px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.08);
+      --shadow-md:    0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:    0 8px 32px rgba(0,0,0,.14);
+      --transition:   .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ──────────────────── RESET & BASE ──────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 14px; }
+    body  { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a     { color: var(--maroon); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--sky-deep); }
+    img   { max-width: 100%; height: auto; display: block; }
+    h1,h2,h3,h4 { font-family: 'Merriweather', serif; line-height: 1.3; }
+    section { padding: 80px 0; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section-title {
+      font-size: 1.9rem; color: var(--navy); margin-bottom: 8px; position: relative;
+    }
+    .section-title::after {
+      content: ''; display: block; width: 56px; height: 3px;
+      background: linear-gradient(90deg, var(--maroon), var(--gold));
+      margin-top: 10px; border-radius: 2px;
+    }
+    .section-subtitle { color: var(--gray-600); font-size: .95rem; margin-top: 4px; margin-bottom: 48px; max-width: 640px; }
+    .tag {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: .72rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase;
+    }
+    .tag-journal    { background: #e8f4fd; color: #1a6fa8; }
+    .tag-conf       { background: #e8f8f0; color: #1a7a4a; }
+    .tag-submitted  { background: #fff5e6; color: #b06b00; }
+    .tag-published  { background: #e6ffe6; color: #1a7a1a; }
+    .tag-revision   { background: #fff0f0; color: #b02000; }
+    .tag-award      { background: #fff8e0; color: #a07000; }
+
+    /* ──────────────────── NAVIGATION ──────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: 0 1px 8px rgba(0,0,0,.07);
+      transition: background var(--transition);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Merriweather', serif; font-size: .95rem; color: var(--text);
+      font-weight: 700; letter-spacing: .02em;
+    }
+    .nav-logo span { color: var(--maroon); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--gray-600); font-size: .82rem; font-weight: 500;
+      letter-spacing: .04em; text-transform: uppercase; transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--maroon); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.3rem; }
+
+    /* ──────────────────── HERO ──────────────────── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--sky-pale) 0%, var(--white) 55%, var(--maroon-pale) 100%);
+      position: relative; overflow: hidden; padding: 100px 0 60px;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a5f96' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    #hero::after {
+      content: ''; position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,95,150,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: center; position: relative; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--maroon-tint); border: 1px solid rgba(107,15,15,.22);
+      color: var(--maroon); padding: 6px 16px; border-radius: 30px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-name {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: var(--text);
+      font-weight: 700; line-height: 1.15; margin-bottom: 12px;
+    }
+    .hero-name span { color: var(--maroon); }
+    .hero-title {
+      font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 400;
+      color: var(--gray-600); margin-bottom: 24px; line-height: 1.6;
+    }
+    .hero-description {
+      font-size: .95rem; color: var(--gray-600); max-width: 520px; margin-bottom: 36px;
+    }
+    .hero-stats {
+      display: flex; gap: 40px; margin-bottom: 40px;
+    }
+    .stat-item { text-align: center; }
+    .stat-number { font-size: 2rem; font-weight: 700; color: var(--maroon); font-family: 'Inter', sans-serif; line-height: 1; }
+    .stat-label  { font-size: .72rem; color: var(--gray-600); letter-spacing: .05em; text-transform: uppercase; margin-top: 4px; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px; border-radius: var(--radius); font-size: .88rem;
+      font-weight: 600; cursor: pointer; transition: all var(--transition); border: none;
+    }
+    .btn-primary { background: var(--maroon); color: var(--white); }
+    .btn-primary:hover { background: var(--maroon-light); color: var(--white); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--gray-200); }
+    .btn-outline:hover { border-color: var(--sky-deep); color: var(--sky-deep); }
+    .btn-gold { background: var(--sky-deep); color: var(--white); }
+    .btn-gold:hover { background: var(--sky); color: var(--white); }
+
+    /* profile card */
+    .profile-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px; padding: 36px 28px 28px; text-align: center;
+      box-shadow: 0 8px 40px rgba(26,95,150,.12), 0 2px 8px rgba(0,0,0,.06);
+    }
+    .profile-avatar-wrap {
+      position: relative; width: 160px; height: 160px; margin: 0 auto 20px;
+    }
+    .profile-avatar-wrap::before {
+      content: ''; position: absolute; inset: -4px; border-radius: 50%;
+      background: conic-gradient(var(--maroon) 0deg, var(--sky) 90deg, rgba(107,15,15,.2) 180deg, var(--maroon) 360deg);
+      animation: spin 8s linear infinite;
+    }
+    .profile-avatar-wrap::after {
+      content: ''; position: absolute; inset: -1px; border-radius: 50%;
+      background: var(--white);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .profile-avatar {
+      position: relative; z-index: 1;
+      width: 152px; height: 152px; border-radius: 50%;
+      margin: 4px auto 0; overflow: hidden;
+      border: 3px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .profile-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .profile-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--maroon-tint); border: 1px solid rgba(107,15,15,.22);
+      color: var(--maroon); font-size: .7rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 3px 12px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .profile-name { color: var(--text); font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
+    .profile-inst { color: var(--gray-600); font-size: .76rem; margin-bottom: 20px; line-height: 1.5; }
+    .profile-divider { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 16px; }
+    .profile-links { display: flex; flex-direction: column; gap: 8px; }
+    .profile-link {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--gray-800); font-size: .82rem;
+      background: var(--gray-100); padding: 8px 12px; border-radius: 8px;
+      transition: all var(--transition);
+    }
+    .profile-link:hover { background: var(--sky-light); color: var(--sky-deep); }
+    .profile-link i { width: 16px; color: var(--maroon); }
+
+    /* ──────────────────── ABOUT ──────────────────── */
+    #about { background: var(--off-white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .about-text p { margin-bottom: 16px; color: var(--gray-800); line-height: 1.8; }
+    .about-text p:first-child { font-size: 1.05rem; font-family: 'Merriweather', serif; font-weight: 300; font-style: italic; color: var(--navy); }
+    .interests-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .interest-item {
+      background: var(--white); border-radius: var(--radius); padding: 14px 16px;
+      border-left: 3px solid var(--maroon); box-shadow: var(--shadow-sm);
+    }
+    .interest-item h4 { font-size: .85rem; color: var(--navy); margin-bottom: 3px; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .interest-item p  { font-size: .78rem; color: var(--gray-600); line-height: 1.5; }
+
+    /* ──────────────────── EDUCATION / TIMELINE ──────────────────── */
+    #education { background: var(--white); }
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px;
+      width: 2px; background: linear-gradient(180deg, var(--maroon), var(--sky), var(--sky-deep));
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--maroon); border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--maroon);
+    }
+    .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+    .timeline-dot.navy { background: var(--sky-deep); box-shadow: 0 0 0 2px var(--sky-deep); }
+    .timeline-date { font-size: .78rem; font-weight: 600; color: var(--gray-600); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+    .timeline-card {
+      background: var(--off-white); border-radius: var(--radius); padding: 20px 24px;
+      border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .timeline-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+    .timeline-card h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 2px; font-family: 'Inter', sans-serif; font-weight: 700; }
+    .timeline-card .inst { font-size: .88rem; color: var(--maroon); font-weight: 500; margin-bottom: 8px; }
+    .timeline-card .desc { font-size: .85rem; color: var(--gray-600); line-height: 1.6; }
+    .timeline-card .thesis { font-size: .82rem; font-style: italic; color: var(--navy-mid); margin-top: 6px; }
+    .timeline-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--maroon); color: var(--white); border-radius: 4px;
+      font-size: .7rem; font-weight: 600; padding: 2px 8px; margin-bottom: 8px; letter-spacing: .04em;
+    }
+
+    /* ──────────────────── RESEARCH SECTIONS ──────────────────── */
+    #research-phd    { background: var(--white); }
+    #research-past   { background: var(--off-white); }
+
+    .research-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--maroon); color: var(--white);
+      padding: 4px 14px; border-radius: 4px; font-size: .72rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+
+    /* project card */
+    .project-card {
+      background: var(--white); border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+      margin-bottom: 36px;
+    }
+    .project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .project-inner { display: grid; grid-template-columns: 1fr 1fr; }
+    .project-inner.reverse { direction: rtl; }
+    .project-inner.reverse > * { direction: ltr; }
+    .project-content { padding: 36px 40px; }
+    .project-num {
+      font-size: .7rem; font-weight: 700; color: var(--maroon); letter-spacing: .1em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .project-title { font-size: 1.25rem; color: var(--navy); margin-bottom: 12px; font-family: 'Merriweather', serif; }
+    .project-desc { font-size: .9rem; color: var(--gray-800); margin-bottom: 20px; line-height: 1.75; }
+    .project-physics {
+      background: var(--sky-pale); color: var(--sky-deep); border-radius: 6px;
+      padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+      margin-bottom: 20px; line-height: 1.8; border-left: 3px solid var(--sky);
+      border: 1px solid var(--sky-light); border-left: 3px solid var(--sky);
+    }
+    .results-list { list-style: none; margin-bottom: 20px; }
+    .results-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: .85rem; color: var(--gray-800); margin-bottom: 8px;
+    }
+    .results-list li::before {
+      content: '▸'; color: var(--gold); flex-shrink: 0; margin-top: 2px; font-size: .8rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tech-tag {
+      background: var(--gray-100); color: var(--gray-800); border-radius: 4px;
+      font-size: .72rem; font-weight: 500; padding: 3px 10px; border: 1px solid var(--gray-200);
+    }
+    .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .project-link-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 6px; font-size: .78rem; font-weight: 600;
+      background: var(--maroon); color: var(--white); transition: all var(--transition);
+    }
+    .project-link-btn:hover { background: var(--maroon-light); color: var(--white); }
+    .project-link-btn.outline {
+      background: transparent; color: var(--maroon); border: 1.5px solid var(--maroon);
+    }
+    .project-link-btn.outline:hover { background: var(--maroon); color: var(--white); }
+    /* figure panel */
+    .project-figure {
+      background: var(--off-white); position: relative; overflow: hidden;
+      min-height: 320px; display: flex; flex-direction: column;
+      border-left: 1px solid var(--gray-200);
+    }
+    .project-figure img {
+      width: 100%; height: 100%; object-fit: contain; padding: 16px;
+      transition: transform .4s ease;
+    }
+    .project-figure:hover img { transform: scale(1.03); }
+    .fig-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(255,255,255,.9));
+      color: var(--gray-800); font-size: .72rem; padding: 24px 16px 12px;
+      line-height: 1.5;
+    }
+    .fig-placeholder {
+      width: 100%; height: 100%; min-height: 320px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--sky-pale), var(--off-white));
+      color: var(--gray-600); gap: 12px; padding: 24px; text-align: center;
+    }
+    .fig-placeholder i { font-size: 3rem; color: rgba(26,95,150,.25); }
+    .fig-placeholder p { font-size: .8rem; line-height: 1.6; }
+
+    /* multi-figure grid */
+    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; height: 100%; }
+    .fig-grid-item { background: var(--gray-100); overflow: hidden; position: relative; }
+    .fig-grid-item img { width: 100%; height: 180px; object-fit: cover; opacity: 1; transition: opacity .3s; }
+    .fig-grid-item:hover img { opacity: .92; }
+    .fig-grid-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,.88); color: var(--gray-800);
+      font-size: .65rem; padding: 4px 8px; text-align: center;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    /* ──────────────────── KEY FINDINGS STRIP ──────────────────── */
+    .findings-strip {
+      background: linear-gradient(135deg, var(--sky-pale) 0%, var(--sky-light) 100%);
+      border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200);
+      padding: 56px 0;
+    }
+    .findings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+    .finding-item .num { font-size: 2.2rem; font-weight: 700; color: var(--maroon); font-family: 'Inter', sans-serif; line-height: 1; }
+    .finding-item .unit { font-size: .85rem; color: var(--sky-deep); }
+    .finding-item .label { font-size: .78rem; color: var(--gray-600); margin-top: 6px; line-height: 1.5; }
+
+    /* ──────────────────── PUBLICATIONS ──────────────────── */
+    #publications { background: var(--white); }
+    .pub-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .pub-filter {
+      padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--gray-200);
+      font-size: .78rem; font-weight: 600; cursor: pointer; transition: all var(--transition);
+      background: var(--white); color: var(--gray-600);
+    }
+    .pub-filter.active, .pub-filter:hover { border-color: var(--maroon); background: var(--maroon); color: var(--white); }
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+    .pub-item {
+      padding: 24px 0; border-bottom: 1px solid var(--gray-200);
+      display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start;
+    }
+    .pub-num { font-size: 1.2rem; font-weight: 700; color: var(--gray-200); font-family: 'Merriweather', serif; text-align: right; padding-top: 2px; }
+    .pub-body {}
+    .pub-title { font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+    .pub-authors { font-size: .82rem; color: var(--gray-600); margin-bottom: 6px; }
+    .pub-authors strong { color: var(--maroon); }
+    .pub-venue { font-size: .82rem; font-style: italic; color: var(--gray-600); margin-bottom: 8px; }
+    .pub-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pub-award { display: flex; align-items: center; gap: 6px; font-size: .78rem; color: #a07000; margin-top: 6px; }
+    .pub-award i { color: var(--gold); }
+
+    /* ──────────────────── SKILLS ──────────────────── */
+    #skills { background: var(--off-white); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .skill-category {
+      background: var(--white); border-radius: var(--radius); padding: 28px;
+      border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+    }
+    .skill-category h3 {
+      font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--maroon); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .skill-category h3 i { font-size: .9rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill-tag {
+      background: var(--off-white); border: 1px solid var(--gray-200);
+      color: var(--gray-800); border-radius: 4px; font-size: .78rem; padding: 4px 10px;
+      transition: all var(--transition);
+    }
+    .skill-tag:hover { background: var(--maroon); color: var(--white); border-color: var(--maroon); }
+    .skill-tag.highlight { background: var(--sky-deep); color: var(--white); border-color: var(--sky-deep); }
+
+    /* ──────────────────── AWARDS ──────────────────── */
+    #awards { background: var(--white); }
+    .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .award-card {
+      background: var(--off-white); border-radius: var(--radius); padding: 20px 24px;
+      border: 1px solid var(--gray-200); display: flex; gap: 16px; align-items: flex-start;
+      box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .award-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .award-icon {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .award-icon.gold    { background: #fff8e0; color: #a07000; }
+    .award-icon.maroon  { background: #fff0f0; color: var(--maroon); }
+    .award-icon.blue    { background: #e8f4fd; color: #1a6fa8; }
+    .award-icon.teal    { background: #e0f8f5; color: var(--accent-teal); }
+    .award-title { font-size: .92rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .award-org   { font-size: .8rem; color: var(--maroon); font-weight: 500; margin-bottom: 4px; }
+    .award-desc  { font-size: .8rem; color: var(--gray-600); line-height: 1.5; }
+    .award-year  { font-size: .72rem; font-weight: 700; color: var(--gray-600); letter-spacing: .05em; }
+
+    /* ──────────────────── CONTACT ──────────────────── */
+    #contact {
+      background: linear-gradient(135deg, var(--sky-pale) 0%, var(--white) 60%, var(--maroon-pale) 100%);
+      padding: 80px 0; border-top: 1px solid var(--gray-200);
+    }
+    #contact .section-title { color: var(--text); }
+    #contact .section-title::after { background: linear-gradient(90deg, var(--maroon), var(--sky)); }
+    #contact .section-subtitle { color: var(--gray-600); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--gray-800); font-size: .9rem;
+    }
+    .contact-item i { width: 40px; height: 40px; background: var(--sky-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--sky-deep); font-size: .95rem; flex-shrink: 0; }
+    .social-links { display: flex; gap: 12px; margin-top: 24px; }
+    .social-link {
+      width: 44px; height: 44px; border-radius: 8px;
+      background: var(--gray-100); border: 1px solid var(--gray-200);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-600); font-size: 1.1rem;
+      transition: all var(--transition);
+    }
+    .social-link:hover { background: var(--maroon); color: var(--white); border-color: var(--maroon); }
+    .collab-note {
+      background: var(--sky-pale); border: 1px solid var(--sky-light);
+      border-radius: 10px; padding: 28px; color: var(--gray-800);
+    }
+    .collab-note h4 { font-size: 1rem; color: var(--sky-deep); margin-bottom: 12px; }
+    .collab-note p { font-size: .88rem; line-height: 1.7; }
+
+    /* ──────────────────── FOOTER ──────────────────── */
+    footer {
+      background: var(--sky-pale); padding: 20px 0; text-align: center;
+      font-size: .78rem; color: var(--gray-600); border-top: 1px solid var(--gray-200);
+    }
+
+    /* ──────────────────── RESPONSIVE ──────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid        { grid-template-columns: 1fr; }
+      .profile-card     { display: none; }
+      .about-grid       { grid-template-columns: 1fr; }
+      .project-inner    { grid-template-columns: 1fr; }
+      .project-inner.reverse { direction: ltr; }
+      .project-figure   { min-height: 260px; }
+      .findings-grid    { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .skills-grid      { grid-template-columns: 1fr 1fr; }
+      .awards-grid      { grid-template-columns: 1fr; }
+      .contact-grid     { grid-template-columns: 1fr; }
+      .nav-links        { display: none; }
+      .nav-toggle       { display: block; }
+    }
+    @media (max-width: 600px) {
+      .findings-grid  { grid-template-columns: 1fr 1fr; }
+      .skills-grid    { grid-template-columns: 1fr; }
+      .interests-grid { grid-template-columns: 1fr; }
+      section         { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">Tanbir <span>Sarowar</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research-phd">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <i class="fa-solid fa-microscope"></i>
+          PhD Researcher · Semiconductor Metrology
+        </div>
+        <h1 class="hero-name">Tanbir<br/><span>Sarowar</span></h1>
+        <p class="hero-title">
+          PhD Candidate, Mechanical Engineering<br/>
+          Precision Metrology &amp; Instrumentation Group<br/>
+          Texas A&amp;M University
+        </p>
+        <p class="hero-description">
+          Developing next-generation metrology tools for semiconductor wafer-chuck interface
+          characterization bridging precision optical sensing, multi-physics simulation,
+          and advanced manufacturing toward sub-nanometer overlay accuracy.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Publications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Institutions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">ASML</div>
+            <div class="stat-label">Industry</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">300mm</div>
+            <div class="stat-label">Si Wafers</div>
+          </div>
+        </div>
+        <div class="hero-buttons">
+          <a href="#research-phd" class="btn btn-primary"><i class="fa-solid fa-flask-vial"></i> View Research</a>
+          <a href="#publications" class="btn btn-outline"><i class="fa-solid fa-book-open"></i> Publications</a>
+          <a href="mailto:tanbirsarowar@iut-dhaka.edu" class="btn btn-gold"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar">
+            <img src="assets/img/headshot.jpg" alt="Tanbir Sarowar" />
+          </div>
+        </div>
+        <div class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> PhD Candidate</div>
+        <div class="profile-name">Tanbir Sarowar</div>
+        <div class="profile-inst">Texas A&amp;M University<br/>Precision Metrology &amp; Instrumentation Lab</div>
+        <hr class="profile-divider"/>
+        <div class="profile-links">
+          <a href="https://www.linkedin.com/in/mdtanbirsarowar" class="profile-link" target="_blank">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://scholar.google.com/mdtanbirsarowar" class="profile-link" target="_blank">
+            <i class="fa-brands fa-google-scholar"></i> Google Scholar
+          </a>
+          <a href="https://engineering.tamu.edu/mechanical/profiles/pmi-group.html" class="profile-link" target="_blank">
+            <i class="fa-solid fa-building-columns"></i> PMI Group
+          </a>
+          <a href="mailto:tanbirsarowar@iut-dhaka.edu" class="profile-link">
+            <i class="fa-solid fa-envelope"></i> tanbirsarowar@iut-dhaka.edu
+          </a>
+          <a href="tel:+15642277174" class="profile-link">
+            <i class="fa-solid fa-phone"></i> +1 (564) 227-7174
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">About</h2>
+        <p style="margin-top:24px;">
+          "I build instruments that see what no eye can: the hidden air gaps, stress
+          fields, and conformity failures between a silicon wafer and the vacuum chuck
+          that holds it during chip fabrication."
+        </p>
+        <p>
+          I am a PhD candidate in the <strong>Precision Metrology &amp; Instrumentation (PMI) Group</strong>
+          at Texas A&amp;M University, advised by Prof. ChaBum Lee. My research addresses a critical
+          unsolved problem in advanced semiconductor manufacturing: how does a 300&nbsp;mm silicon
+          wafer actually conform to a vacuum chuck, and how do nanometer-scale surface imperfections
+          propagate into overlay and CD errors at the 3&nbsp;nm technology node?
+        </p>
+        <p>
+          I tackle this through a multi-pronged approach developing new optical and impedance-based
+          metrology tools, building physics-based fluid-structure interaction simulations, and
+          translating findings toward real-time in-line inspection. I also bring direct industry
+          perspective from my internship at <strong>ASML</strong>, where I worked on High-NA EUV
+          machine commissioning at Intel's D1X fab.
+        </p>
+        <p>
+          Before TAMU, I completed my MS at Washington State University Vancouver, applying
+          machine learning to microfluidic device design for cancer cell separation. My undergraduate
+          work at the Islamic University of Technology (Bangladesh) focused on thermal management
+          with nano-liquid-metal coolants.
+        </p>
+      </div>
+      <div>
+        <h3 style="font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--maroon);margin-bottom:16px;">
+          Research Interests
+        </h3>
+        <div class="interests-grid">
+          <div class="interest-item">
+            <h4>Semiconductor Metrology</h4>
+            <p>Non-destructive inspection of wafer-chuck interfaces and bonded wafer quality</p>
+          </div>
+          <div class="interest-item">
+            <h4>Precision Optics</h4>
+            <p>NIR interferometry, photoelasticity, and full-field IR imaging through silicon</p>
+          </div>
+          <div class="interest-item">
+            <h4>Multi-physics Simulation</h4>
+            <p>FSI coupling of Reynolds lubrication with Kirchhoff-Love plate mechanics</p>
+          </div>
+          <div class="interest-item">
+            <h4>MEMS/NEMS Sensing</h4>
+            <p>Impedance spectroscopy, capacitive sensing, and resonance characterization</p>
+          </div>
+          <div class="interest-item">
+            <h4>Advanced Manufacturing</h4>
+            <p>EUV lithography requirements, 3D IC packaging, hybrid bonding inspection</p>
+          </div>
+          <div class="interest-item">
+            <h4>Machine Learning</h4>
+            <p>Data-driven surrogate models for microfluidic device design optimization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     EDUCATION & CAREER TIMELINE
+════════════════════════════════════════════════════════ -->
+<section id="education">
+  <div class="container">
+    <h2 class="section-title">Education &amp; Career</h2>
+    <p class="section-subtitle">A journey from thermal engineering in Bangladesh to semiconductor metrology at the frontiers of advanced chip manufacturing.</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Jan 2025 – Present</div>
+        <div class="timeline-card">
+          <div class="timeline-badge"><i class="fa-solid fa-graduation-cap"></i> Current</div>
+          <h3>PhD in Mechanical Engineering</h3>
+          <div class="inst">Texas A&amp;M University · College Station, TX</div>
+          <div class="desc">
+            Graduate Research Assistant in the Precision Metrology &amp; Instrumentation (PMI) Group,
+            advised by Prof. ChaBum Lee. Research on non-destructive characterization of 300&nbsp;mm
+            silicon wafer–vacuum chuck interfaces using EIS, NIR spectroscopy, and multi-physics simulation.
+          </div>
+          <div class="thesis">Dissertation: Silicon Wafer-Vacuum Chuck Interface Characterization and Geometric Conformity Study for Advanced Semiconductor Metrology</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot gold"></div>
+        <div class="timeline-date">May 2024 – Aug 2024</div>
+        <div class="timeline-card">
+          <div class="timeline-badge" style="background:var(--gold);color:var(--navy)"><i class="fa-solid fa-industry"></i> Industry</div>
+          <h3>Intern — Customer Support Engineer</h3>
+          <div class="inst" style="color:var(--gold);">ASML · Hillsboro, Oregon (Intel D1X Fab)</div>
+          <div class="desc">
+            Worked with the install team on ASML's latest <strong>High-NA EUV</strong> lithography
+            machine — the most advanced optical instrument in semiconductor manufacturing.
+            Coordinated module adjustments and qualification tests at Intel's cutting-edge D1X fabrication facility.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Jan 2023 – Dec 2024</div>
+        <div class="timeline-card">
+          <h3>MS in Mechanical Engineering</h3>
+          <div class="inst">Washington State University Vancouver · Vancouver, WA &nbsp;|&nbsp; CGPA: 3.91/4.00</div>
+          <div class="desc">
+            Graduate Research &amp; Teaching Assistant. Developed ML-guided design methodology for
+            microfluidic cancer cell separation devices using COMSOL CFD simulations and supervised
+            machine learning (Random Forest, Gradient Boosting, KNN, MLP).
+          </div>
+          <div class="thesis">Thesis: Predictive Modeling in Cancer Cell Separation: A Machine Learning Approach in DLD Devices (Advisor: Dr. Xiaolin Chen)</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot navy"></div>
+        <div class="timeline-date">Mar 2021 – Dec 2022</div>
+        <div class="timeline-card">
+          <div class="timeline-badge" style="background:var(--navy)"><i class="fa-solid fa-wrench"></i> Industry</div>
+          <h3>Engineer</h3>
+          <div class="inst" style="color:var(--navy);">Bangla Trac Limited (Caterpillar Inc. USA) · Dhaka, Bangladesh</div>
+          <div class="desc">
+            Led technician teams in diagnosing and resolving complex failures in CAT Marine and industrial
+            engines. Conducted on-site troubleshooting and repairs, gaining hands-on expertise in
+            large-scale mechanical systems.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Jan 2017 – Mar 2021</div>
+        <div class="timeline-card">
+          <h3>BS in Mechanical Engineering</h3>
+          <div class="inst">Islamic University of Technology · Gazipur, Bangladesh &nbsp;|&nbsp; CGPA: 3.77/4.00 (Top 10%)</div>
+          <div class="desc">
+            Undergraduate thesis on performance comparison of microchannel heat sinks using
+            nano-liquid-metal-fluid coolants. Published 3 journal papers during undergraduate studies.
+          </div>
+          <div class="thesis">Thesis: Performance comparison of microchannel heat sink using nano-liquid-metal-fluid coolant (Advisor: Dr. Md Hamidur Rahman)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     KEY METRICS STRIP
+════════════════════════════════════════════════════════ -->
+<div class="findings-strip">
+  <div class="container">
+    <div class="findings-grid">
+      <div class="finding-item">
+        <div class="num">10–15</div><div class="unit">µm</div>
+        <div class="label">Air gap reduction measured upon vacuum application (NIR spectroscopy)</div>
+      </div>
+      <div class="finding-item">
+        <div class="num">4.6×</div>
+        <div class="label">Harder to de-chuck for rough wafer (Rq 5nm vs 0.5nm, FSI simulation)</div>
+      </div>
+      <div class="finding-item">
+        <div class="num">R²&nbsp;=&nbsp;0.994</div>
+        <div class="label">ML model accuracy for critical diameter prediction in DLD devices</div>
+      </div>
+      <div class="finding-item">
+        <div class="num">8.5M</div>
+        <div class="label">Particle trajectory data points generated for ML training dataset</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PhD RESEARCH
+════════════════════════════════════════════════════════ -->
+<section id="research-phd">
+  <div class="container">
+    <div class="research-label"><i class="fa-solid fa-atom"></i> PhD Research · Texas A&amp;M University</div>
+    <h2 class="section-title">Wafer–Chuck Interface Metrology</h2>
+    <p class="section-subtitle">
+      Developing a suite of non-destructive sensing and simulation tools to characterize the
+      microscale air gap between 300&nbsp;mm silicon wafers and vacuum chucks — directly
+      impacting overlay accuracy in advanced semiconductor lithography.
+    </p>
+
+    <!-- PROJECT 1: EIS -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-num">Project 01 · EIS Metrology</div>
+          <h3 class="project-title">Electrochemical Impedance Spectroscopy for Wafer-Chuck Interface Characterization</h3>
+          <p class="project-desc">
+            Pioneered the use of EIS as a spatial metrology tool for the wafer-chuck interface.
+            A ball-ended magnetic probe scans the wafer surface while the nickel-plated ceramic chuck
+            acts as the bottom electrode, forming a capacitive stack: probe → wafer → air gap → chuck.
+            The Nyquist diagram maps spatial impedance across the wafer, fingerprinting air gap magnitude,
+            chuck damage, and vacuum state.
+          </p>
+          <div class="project-physics">
+            Z_gap = 1/(jωC_gap), &nbsp; C_gap = ε₀·A / h(r)<br/>
+            Series model: Z_total = Z_probe + Z_wafer + Z_gap + Z_chuck<br/>
+            Spacer validation: +25 MΩ per 50 µm gap layer
+          </div>
+          <div class="project-tags">
+            <span class="tech-tag">Sciospec ISX-3</span>
+            <span class="tech-tag">Nyquist Analysis</span>
+            <span class="tech-tag">37-pt Polar Map</span>
+            <span class="tech-tag">Equivalent Circuit</span>
+            <span class="tech-tag">300mm Wafer</span>
+            <span class="tech-tag">Samsung Samples</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn"><i class="fa-solid fa-file-lines"></i> Journal Submitted</span>
+            <span class="project-link-btn outline"><i class="fa-solid fa-flask"></i> Active</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <div class="fig-grid">
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/setups/eis_setup.bmp" alt="Nyquist diagram vacuum ON vs OFF"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Nyquist: Vacuum ON vs OFF</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Setups/eis_chuck1.png" alt="37-point polar impedance map"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">37-pt Polar Impedance Map</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Setups/figure1.bmp" alt="Chuck damage sticker test"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Chuck Damage: Sticker Test</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Setups/results1.png" alt="Wafer-Chuck interface impedance results"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Samsung SiCN Bonded Wafer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: NIR -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-content">
+          <div class="project-num">Project 02 · Optical Sensing</div>
+          <h3 class="project-title">NIR Fabry-Pérot Reflection Spectroscopy for Air Gap Measurement</h3>
+          <p class="project-desc">
+            Developed a 1064&nbsp;nm NIR reflection spectroscopy system that exploits silicon's
+            transparency in the near-infrared to directly measure the air gap between the wafer's
+            bottom surface and the chuck top. The gap forms a Fabry-Pérot cavity whose interference
+            fringes encode thickness — extracted via FFT of the reflection spectrum.
+          </p>
+          <div class="project-physics">
+            FP condition: 2·n_air·h = m·λ &nbsp;→&nbsp; h = m·λ / (2·Δf·n_air)<br/>
+            FFT peak frequency → gap thickness h(r)<br/>
+            Resolution: Δh ≈ λ²/(2·Δλ) → micrometer-scale sensitivity<br/>
+            Cross-validated with Lion Precision CPL190 (2.8 mV/µm)
+          </div>
+          <div class="project-tags">
+            <span class="tech-tag">1064nm NIR Laser</span>
+            <span class="tech-tag">SWIR Camera</span>
+            <span class="tech-tag">Fabry-Pérot</span>
+            <span class="tech-tag">FFT Analysis</span>
+            <span class="tech-tag">Cap Sensor Validation</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn"><i class="fa-solid fa-file-lines"></i> MSEC 2026 (Under Revision)</span>
+            <span class="project-link-btn outline"><i class="fa-solid fa-flask"></i> Active</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <img src="assets/img/exp/Setups/setup2.png" alt="NIR spectroscopy air gap measurement"
+               style="width:100%;border-radius:8px;display:block;object-fit:contain;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: FSI SIM -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-num">Project 03 · Computational Physics</div>
+          <h3 class="project-title">Multi-physics FSI Simulation Suite for Transient Wafer Chucking</h3>
+          <p class="project-desc">
+            Built a complete fluid-structure interaction (FSI) simulation suite in Python from scratch —
+            coupling compressible Reynolds lubrication theory with Kirchhoff-Love plate mechanics
+            to predict the transient conformity of a 300&nbsp;mm wafer on grooved and porous vacuum chucks.
+            Both 1D (radially symmetric) and full 2D solvers implemented with Newmark-β time integration.
+          </p>
+          <div class="project-physics">
+            Reynolds (compressible): ∂/∂r[r·h³·∂p/∂r] = 12µ·∂(ph)/∂t<br/>
+            Plate bending: D·∇⁴w = q(r,t), &nbsp; D = Eh³/[12(1−ν²)]<br/>
+            Gap dynamics: h(r,t) = h₀(r) − w(r,t)<br/>
+            Contact: Greenwood-Williamson (GW) asperity model<br/>
+            Slip-flow: Fukui-Kaneko Kn correction for nanoscale gaps
+          </div>
+          <div class="project-tags">
+            <span class="tech-tag">Python 3.13</span>
+            <span class="tech-tag">FDM + FEM</span>
+            <span class="tech-tag">Newmark-β</span>
+            <span class="tech-tag">Newton-Raphson</span>
+            <span class="tech-tag">Reynolds Eq.</span>
+            <span class="tech-tag">GW Contact</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/tanbirsarowar" class="project-link-btn" target="_blank"><i class="fa-brands fa-github"></i> GitHub (Coming Soon)</a>
+            <span class="project-link-btn outline"><i class="fa-solid fa-code"></i> wafer_chuck_sim</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <div class="fig-grid">
+            <div class="fig-grid-item">
+              <img src="assets/img/sim/f1.png" alt="Force traces comparison"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-chart-area\'></i><p style=\'font-size:.7rem\'>Vacuum &amp; adhesion force traces — 4 surface states</p></div>'" />
+              <div class="fig-grid-label">Force Traces (4 Surface States)</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/sim/f2.png" alt="Contact fraction evolution"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-percent\'></i><p style=\'font-size:.7rem\'>Contact fraction vs time during chucking</p></div>'" />
+              <div class="fig-grid-label">Contact Fraction Evolution</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/sim/f3.png" alt="Grooved chuck geometry"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-circle-notch\'></i><p style=\'font-size:.7rem\'>Grooved chuck geometry — 7 concentric vacuum rings</p></div>'" />
+              <div class="fig-grid-label">Grooved Chuck Geometry</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/sim/f4.png" alt="Surface state comparison"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-layer-group\'></i><p style=\'font-size:.7rem\'>Surface state parametric comparison — gap &amp; pressure profiles</p></div>'" />
+              <div class="fig-grid-label">Surface State Comparison (1D)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4: Advanced sensing -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-content">
+          <div class="project-num">Project 04 · Advanced Sensing</div>
+          <h3 class="project-title">Multi-Modal Dynamic Characterization: Stroboscopy, Thermography &amp; Acoustics</h3>
+          <p class="project-desc">
+            Extended the characterization toolkit beyond static gap measurement into the dynamic
+            and thermal domains. Stroboscopic vibrometry captures wafer resonance modes under vacuum;
+            flash thermography maps contact area via thermal conductance contrast; acoustic
+            spectroscopy detects vacuum transient events.
+          </p>
+          <div class="project-tags">
+            <span class="tech-tag">445nm LED Strobe</span>
+            <span class="tech-tag">10k fps Camera</span>
+            <span class="tech-tag">IR Thermal Camera</span>
+            <span class="tech-tag">Microphone + DAQ</span>
+            <span class="tech-tag">STFT</span>
+            <span class="tech-tag">Centroid Tracking</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn outline"><i class="fa-solid fa-flask"></i> Active · Spring 2026</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <div class="fig-grid">
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/adaptive_setups/f4.png" alt="Geometric conformity of wafer-chuck interface"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-wind\'></i><p style=\'font-size:.7rem\'>Simulated squeeze-film pressure fields — inner vs outer port modes</p></div>'" />
+              <div class="fig-grid-label">Squeeze-Film Pressure (Port Modes)</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/adaptive_setups/f2.png" alt="Surface conditioning for contact mapping"
+                   onerror="this.parentElement.innerHTML='<div class=\'fig-placeholder\' style=\'min-height:180px\'><i class=\'fa-solid fa-map\'></i><p style=\'font-size:.7rem\'>2D contact area maps — inner, outer, all-port vacuum modes</p></div>'" />
+              <div class="fig-grid-label">2D Contact Maps (Port Modes)</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/adaptive_setups/f3.png" alt="Capacitive contact mapping"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Capacitive Contact Mapping</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/adaptive_setups/f1.png" alt="infrared interferometry for contact mapping"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Infrared Interferometry (~10 kHz)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 6: Wafer Bonding Inspection -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-content">
+          <div class="project-num">Project 06 · Wafer Bonding Inspection</div>
+          <h3 class="project-title">Non-Destructive Bonded Wafer Quality Assessment by Electrochemical Impedance Spectroscopy</h3>
+          <p class="project-desc">
+            Extended the EIS metrology framework from the wafer-chuck interface to the inspection of
+            hybrid-bonded wafer stacks — a critical need as 3D IC packaging (SiCN-SiCN, Cu-Cu direct
+            bonding) becomes the dominant interconnect technology. Samsung-provided SiCN fusion-bonded
+            300&nbsp;mm wafer pairs were mapped using a 37-point polar grid and 7×7 grid, revealing
+            spatial bonding quality with sub-MΩ sensitivity. Presented at the Texas Semiconductor
+            Manufacturers (TSM) Annual Meeting 2026.
+          </p>
+          <div class="project-physics">
+            Equivalent circuit: Z = Z_probe + Z_wafer + Z_bond + Z_substrate<br/>
+            Bonding layer: modeled as parallel R_bond ∥ C_bond (CPE element)<br/>
+            Well-bonded: R_bond ≈ 622 kΩ (matched to theory)<br/>
+            Defective / void region: R_bond → 2–3 MΩ (impedance rise)<br/>
+            Post-anneal uniformity: σ reduces from 1.18 MΩ → 0.10 MΩ
+          </div>
+          <div class="project-tags">
+            <span class="tech-tag">Sciospec ISX-3</span>
+            <span class="tech-tag">SiCN-SiCN Bonding</span>
+            <span class="tech-tag">37-pt Polar Map</span>
+            <span class="tech-tag">7×7 Grid Scan</span>
+            <span class="tech-tag">Samsung Collaboration</span>
+            <span class="tech-tag">Hybrid Bonding</span>
+            <span class="tech-tag">Annealing Study</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn"><i class="fa-solid fa-chalkboard-user"></i> TSM 2026 — Presented</span>
+            <span class="project-link-btn outline"><i class="fa-solid fa-file-lines"></i> Journal Submitted</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <div class="fig-grid">
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Wafer Bonding/f1.png" alt="Experimental setup for bonded wafer EIS"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">37-pt Polar Map: SiCN-SiCN</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Wafer Bonding/setup.png" alt="Nyquist well-bonded vs defective"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Nyquist: Bonded vs Defective</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Wafer Bonding/f3.png" alt="Wafer quality map post-annealing"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Annealing Effect (1 hr vs 2 hr)</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/Wafer Bonding/results.png" alt="37 point polar map of bonded wafer impedance"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Equivalent Circuit Model</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     PAST RESEARCH
+════════════════════════════════════════════════════════ -->
+<section id="research-past">
+  <div class="container">
+    <div class="research-label"><i class="fa-solid fa-clock-rotate-left"></i> Previous Research</div>
+    <h2 class="section-title">Masters &amp; Undergraduate Work</h2>
+    <p class="section-subtitle">A research career spanning thermal engineering, microfluidics, and machine learning — building the interdisciplinary foundation for precision metrology.</p>
+
+    <!-- MASTERS: DLD -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-num">Masters Thesis · WSU Vancouver · 2023–2024</div>
+          <h3 class="project-title">ML-Guided Design of DLD Microfluidic Devices for Cancer Cell Separation</h3>
+          <p class="project-desc">
+            Developed a data-driven design framework for Deterministic Lateral Displacement (DLD)
+            microfluidic devices targeting circulating tumor cell (CTC) separation from blood.
+            Combined high-fidelity COMSOL CFD simulations with supervised machine learning to
+            create a fast surrogate model replacing hours of CFD with millisecond predictions.
+          </p>
+          <div class="project-physics">
+            DLD critical diameter: D_c = f(N_pillars, D_pillar, Gap, λ)<br/>
+            Dataset: 1,046 device configs × 8,100 particles = 8.5M trajectories<br/>
+            Random Forest: R² = 0.994, MAE = 0.31 µm<br/>
+            Speedup: &gt;10,000× over iterative CFD design
+          </div>
+          <ul class="results-list">
+            <li>8.5 million particle trajectory data points from COMSOL parametric sweeps</li>
+            <li>Random Forest R² = 0.994, MAE = 0.31 µm near-perfect critical diameter prediction</li>
+            <li>Colorectal CTC case study: optimal N=15, D_c=10–12 µm found in 2.3 seconds</li>
+            <li>Compared 4 ML algorithms: Random Forest outperforms GB, KNN, and MLP</li>
+            <li><strong>Award:</strong> Best Student Paper for Global Impact — MEMS Division, ASME IMECE 2023</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tech-tag">COMSOL</span>
+            <span class="tech-tag">Random Forest</span>
+            <span class="tech-tag">Python ML</span>
+            <span class="tech-tag">DLD Microfluidics</span>
+            <span class="tech-tag">CTC Separation</span>
+            <span class="tech-tag">CFD</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn"><i class="fa-solid fa-file-lines"></i> Journal Submitted</span>
+            <span class="project-link-btn outline"><i class="fa-solid fa-newspaper"></i> IMECE 2023 + 2024</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <div class="fig-grid">
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/dld/image4.png" alt="DLD pillar array separation"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">DLD Pillar Array</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/dld_png/figure_4_6_model_performance.png" alt="ML Random Forest prediction vs CFD"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">ML Model: R²=0.994</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/dld/image35.png" alt="COMSOL particle trajectories"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">COMSOL Particle Trajectories</div>
+            </div>
+            <div class="fig-grid-item">
+              <img src="assets/img/exp/dld/image36.png" alt="Flow chart"
+                   style="width:100%;height:100%;object-fit:contain;" />
+              <div class="fig-grid-label">Flow chart</div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNDERGRAD: Heat Sink -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-content">
+          <div class="project-num">Undergraduate Thesis · IUT · 2019–2021</div>
+          <h3 class="project-title">Microchannel Heat Sink Performance with Nano-Liquid-Metal-Fluid Coolants</h3>
+          <p class="project-desc">
+            Numerically investigated advanced microchannel heat sink designs using nano-liquid-metal-fluid
+            (nano-LMF) coolants for high-performance electronic cooling. Used ANSYS FLUENT for conjugate
+            heat transfer simulations, parametrically comparing multiple coolant compositions and ceramic
+            substrate materials to identify optimal thermal resistance configurations.
+          </p>
+          <ul class="results-list">
+            <li>Nano-liquid-metal fluids show significantly higher heat removal capacity than conventional coolants</li>
+            <li>Five ceramic substrate materials compared: optimal thermal-mechanical combination identified</li>
+            <li>Boron-based ceramic materials outperform standard substrates in combined thermal-structural figure of merit</li>
+            <li>Published 3 journal papers (Elsevier Ceramics International, ASME J. Thermal Science, Adv. Mater. Res.) as first/co-author</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tech-tag">ANSYS FLUENT</span>
+            <span class="tech-tag">Conjugate Heat Transfer</span>
+            <span class="tech-tag">Nano-LMF</span>
+            <span class="tech-tag">Microchannel</span>
+            <span class="tech-tag">Electronic Cooling</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link-btn"><i class="fa-solid fa-file-lines"></i> Ceramics Int. (2021)</span>
+            <span class="project-link-btn outline"><i class="fa-solid fa-file-lines"></i> ASME JTSEA (2022)</span>
+          </div>
+        </div>
+        <div class="project-figure">
+          <img src="assets/img/exp/heat_sink1.png" alt="ANSYS FLUENT heat sink simulation"
+               style="width:100%;border-radius:8px;display:block;object-fit:contain;" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     PUBLICATIONS
+════════════════════════════════════════════════════════ -->
+<section id="publications">
+  <div class="container">
+    <h2 class="section-title">Publications</h2>
+    <p class="section-subtitle">Journal articles, conference papers, and manuscripts under review. <strong>Bold</strong> = Tanbir Sarowar.</p>
+
+    <div class="pub-list">
+
+      <!-- PhD publications -->
+      <div class="pub-item">
+        <div class="pub-num">1</div>
+        <div class="pub-body">
+          <div class="pub-title">Wafer-Vacuum Chuck Interface Characterization by Electrochemical Impedance Spectroscopy</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, Y. Lim, M.A. Islam, H. Chun, K. Lu, C. Lee</div>
+          <div class="pub-venue">Journal of Manufacturing Science and Engineering (ASME) — Submitted 2025</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-submitted">Submitted</span>
+            <span class="tag" style="background:#f0e8ff;color:#6600cc">EIS</span>
+            <span class="tag" style="background:#e8f0ff;color:#003399">Semiconductor Metrology</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">2</div>
+        <div class="pub-body">
+          <div class="pub-title">Silicon Wafer-Vacuum Chuck Interface Characterization Using Near Infrared Reflection Spectroscopy</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, Y. Lim, H. Chun, C. Lee</div>
+          <div class="pub-venue">ASME MSEC 2026 (MSEC2026-182893) — Under Revision | June 2026, State College, PA</div>
+          <div class="pub-tags">
+            <span class="tag tag-conf">Conference</span>
+            <span class="tag tag-revision">Under Revision</span>
+            <span class="tag" style="background:#e8f0ff;color:#003399">NIR Spectroscopy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">3</div>
+        <div class="pub-body">
+          <div class="pub-title">Non-destructive Quality Assessment of Bonded Wafers using Electrochemical Impedance Spectroscopy</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, C. Lee</div>
+          <div class="pub-venue">Texas Semiconductor Manufacturers (TSM) Annual Meeting 2026 — Submitted (Abstract)</div>
+          <div class="pub-tags">
+            <span class="tag tag-conf">Conference</span>
+            <span class="tag tag-submitted">Submitted</span>
+            <span class="tag" style="background:#e0f8f5;color:#007755">Wafer Bonding</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">4</div>
+        <div class="pub-body">
+          <div class="pub-title">Wafer Bonding Layer Characterization and Inspection by Electrochemical Impedance Spectroscopy (EIS)</div>
+          <div class="pub-authors">C. Kim<sup>†</sup>, H. Chun<sup>†</sup>, H. Lee, <strong>M.T. Sarowar</strong>, C. Lee &nbsp;<em>(†equal contribution)</em></div>
+          <div class="pub-venue">Journal — Submitted 2025</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-submitted">Submitted</span>
+            <span class="tag" style="background:#e0f8f5;color:#007755">Hybrid Bonding</span>
+            <span class="tag" style="background:#e8f4fd;color:#1a6fa8">Samsung Collaboration</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Masters publications -->
+      <div class="pub-item">
+        <div class="pub-num">5</div>
+        <div class="pub-body">
+          <div class="pub-title">Data-Driven Design of Deterministic Lateral Displacement Microfluidic Devices for CTC Separation</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, S.A. Mim, X. Chen</div>
+          <div class="pub-venue">Journal — Submitted 2026 (v3 manuscript)</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-submitted">Submitted</span>
+            <span class="tag" style="background:#fff8e0;color:#a07000">ML · R²=0.994</span>
+            <span class="tag" style="background:#e8f0ff;color:#003399">Microfluidics</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">6</div>
+        <div class="pub-body">
+          <div class="pub-title">Predictive Modelling of Microfluidic Devices Targeting Cancer Cell Separation</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, M. Mobarrat, X. Chen</div>
+          <div class="pub-venue">ASME IMECE 2024, Volume 10: Micro- and Nano-Systems. Portland, OR, Nov 17–21, 2024</div>
+          <div class="pub-tags">
+            <span class="tag tag-conf">Conference</span>
+            <span class="tag tag-published">Published</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">7</div>
+        <div class="pub-body">
+          <div class="pub-title">Separation of CTCs from Blood Cells using Curved Contraction-Expansion Microchannel Equipped with DEP Force</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong>, M.S. Islam, X. Chen</div>
+          <div class="pub-venue">ASME IMECE 2023, Volume 12: Micro- and Nano-Systems. New Orleans, LA, Oct 29–Nov 2, 2023</div>
+          <div class="pub-tags">
+            <span class="tag tag-conf">Conference</span>
+            <span class="tag tag-published">Published</span>
+            <span class="tag tag-award"><i class="fa-solid fa-trophy"></i> Best Paper — Global Impact, MEMS Division</span>
+          </div>
+          <div class="pub-award"><i class="fa-solid fa-trophy"></i> Best Student Article for Global Impact — MEMS Division, ASME IMECE 2023</div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">8</div>
+        <div class="pub-body">
+          <div class="pub-title">Separation of CTCs from WBCs using DEP-assisted Inertial Manipulation</div>
+          <div class="pub-authors">M.R. Uddin, <strong>M.T. Sarowar</strong>, X. Chen</div>
+          <div class="pub-venue">Electrophoresis, Wiley, 2023</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-published">Published</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Undergrad publications -->
+      <div class="pub-item">
+        <div class="pub-num">9</div>
+        <div class="pub-body">
+          <div class="pub-title">Heat Transfer and Failure Inspection of Gas Turbine Compressor Stator Blade</div>
+          <div class="pub-authors">A. Abid, <strong>M.T. Sarowar</strong></div>
+          <div class="pub-venue">Journal of Failure Analysis and Prevention (Springer), 2022</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-published">Published</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">10</div>
+        <div class="pub-body">
+          <div class="pub-title">Performance Comparison of a Microchannel Heat Sink using different Nano-Liquid-Metal-Fluid: A Numerical Study</div>
+          <div class="pub-authors">Y. Khan, <strong>M.T. Sarowar</strong>, M. Mobarrat, M.H. Rahman</div>
+          <div class="pub-venue">Journal of Thermal Science and Engineering Applications (ASME), 2022, 1–33</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-published">Published</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">11</div>
+        <div class="pub-body">
+          <div class="pub-title">Numerical Analysis of a Liquid Metal Cooled Mini Channel Heat Sink with Five Different Ceramic Substrates</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong></div>
+          <div class="pub-venue">Ceramics International (Elsevier), 47 (2021) 214–225</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-published">Published</span>
+            <span class="tag" style="background:#ffe0e0;color:#900000">First Author</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">12</div>
+        <div class="pub-body">
+          <div class="pub-title">Performance Comparison of Microchannel Heat Sink Using Boron-Based Ceramic Materials</div>
+          <div class="pub-authors"><strong>M.T. Sarowar</strong></div>
+          <div class="pub-venue">Advanced Materials Research (Scientific.net), 1163 (2021) 73–88</div>
+          <div class="pub-tags">
+            <span class="tag tag-journal">Journal</span>
+            <span class="tag tag-published">Published</span>
+            <span class="tag" style="background:#ffe0e0;color:#900000">First Author</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-subtitle">Spanning experimental metrology, computational physics, and semiconductor domain knowledge.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-flask"></i> Experimental Instruments</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Sciospec ISX-3 (EIS)</span>
+          <span class="skill-tag highlight">NIR/SWIR Fabry-Pérot</span>
+          <span class="skill-tag highlight">Lion Precision Capacitive Sensor</span>
+          <span class="skill-tag">High-Speed Camera (10k fps)</span>
+          <span class="skill-tag">Stroboscopic LED (445nm)</span>
+          <span class="skill-tag">IR Thermal Camera</span>
+          <span class="skill-tag">Piezo Actuators</span>
+          <span class="skill-tag">Acoustic Microphone + DAQ</span>
+          <span class="skill-tag">Nd-YAG 532nm Pulsed Laser</span>
+          <span class="skill-tag">1064nm CW Laser</span>
+          <span class="skill-tag">SWIR Camera (InGaAs)</span>
+          <span class="skill-tag">Grating Interferometer (632nm)</span>
+          <span class="skill-tag">Nomarski DIC Microscope</span>
+          <span class="skill-tag">WLI (White Light Interferometry)</span>
+          <span class="skill-tag">2-axis Scanning Stage</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-code"></i> Computational / Programming</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Python 3.13+ (NumPy, SciPy, Matplotlib)</span>
+          <span class="skill-tag highlight">COMSOL Multiphysics</span>
+          <span class="skill-tag highlight">ANSYS FLUENT</span>
+          <span class="skill-tag highlight">MATLAB</span>
+          <span class="skill-tag">Custom FDM Fluid Solver</span>
+          <span class="skill-tag">Custom FEM Plate Solver</span>
+          <span class="skill-tag">Newmark-β Time Integration</span>
+          <span class="skill-tag">Newton-Raphson Iteration</span>
+          <span class="skill-tag">Random Forest / Gradient Boosting</span>
+          <span class="skill-tag">KNN / MLP</span>
+          <span class="skill-tag">STFT / FFT Signal Processing</span>
+          <span class="skill-tag">Sparse Linear Solvers (SciPy)</span>
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">LaTeX / Word (ASME template)</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-atom"></i> Physics &amp; Modeling</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Reynolds Lubrication Theory</span>
+          <span class="skill-tag highlight">Kirchhoff-Love Plate Mechanics</span>
+          <span class="skill-tag highlight">Fabry-Pérot Interferometry</span>
+          <span class="skill-tag highlight">EIS / Nyquist Analysis</span>
+          <span class="skill-tag">Fluid-Structure Interaction (FSI)</span>
+          <span class="skill-tag">Greenwood-Williamson Contact</span>
+          <span class="skill-tag">Föppl-von Kármán (large deflection)</span>
+          <span class="skill-tag">Fukui-Kaneko Slip-Flow</span>
+          <span class="skill-tag">Capillary &amp; van der Waals Adhesion</span>
+          <span class="skill-tag">DIC (Differential Interference Contrast)</span>
+          <span class="skill-tag">Squeeze-Film Dynamics</span>
+          <span class="skill-tag">Zernike Polynomials</span>
+          <span class="skill-tag">Thermoacoustic Wave Physics</span>
+          <span class="skill-tag">Lamb Wave Propagation</span>
+          <span class="skill-tag">Photoelastic Stress Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-microchip"></i> Semiconductor Domain</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">EUV Lithography (ASML)</span>
+          <span class="skill-tag highlight">Vacuum Chuck Technology</span>
+          <span class="skill-tag highlight">Wafer Metrology (TTV, Bow, Warp)</span>
+          <span class="skill-tag">300mm Si Wafer Handling</span>
+          <span class="skill-tag">Hybrid Bonding (SiCN, Cu-Cu)</span>
+          <span class="skill-tag">FOUP / Wafer Transport</span>
+          <span class="skill-tag">FinFET → GAA Technology</span>
+          <span class="skill-tag">Overlay / CDU Requirements</span>
+          <span class="skill-tag">3D NAND / HBM / TSV</span>
+          <span class="skill-tag">CMP Requirements (&lt;0.5nm Rq)</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-vial"></i> Cleanroom &amp; Fabrication</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Oxford Extrelas 100 (ICP-RIE)</span>
+          <span class="skill-tag">Bosch DRIE Process</span>
+          <span class="skill-tag">Cryogenic DRIE</span>
+          <span class="skill-tag">PECVD (SiN, SiO₂)</span>
+          <span class="skill-tag">O₂ Plasma Activation</span>
+          <span class="skill-tag">OTS Hydrophobic Coating</span>
+          <span class="skill-tag">HMDSO Plasma Polymerization</span>
+          <span class="skill-tag">PEG Grafting</span>
+          <span class="skill-tag">Sessile Drop Contact Angle</span>
+          <span class="skill-tag">Aggie Fab (TAMU Cleanroom)</span>
+          <span class="skill-tag">Class 100 Cleanroom Protocols</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fa-solid fa-chart-bar"></i> Data &amp; Signal Processing</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">FFT-based Fringe Analysis</span>
+          <span class="skill-tag highlight">STFT (Acoustic Events)</span>
+          <span class="skill-tag">Stroboscopic Aliasing Analysis</span>
+          <span class="skill-tag">Sub-pixel Centroid Tracking</span>
+          <span class="skill-tag">Spectral Subtraction (Noise)</span>
+          <span class="skill-tag">Normal Distribution Classification</span>
+          <span class="skill-tag">Parametric Study Automation</span>
+          <span class="skill-tag">Reversal Technique (Surface Map)</span>
+          <span class="skill-tag">Lock-in Detection (planned)</span>
+          <span class="skill-tag">Zotero Reference Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     AWARDS & SERVICE
+════════════════════════════════════════════════════════ -->
+<section id="awards">
+  <div class="container">
+    <h2 class="section-title">Awards &amp; Service</h2>
+    <p class="section-subtitle">Recognition, teaching, and mentoring throughout the research journey.</p>
+
+    <div class="awards-grid">
+
+      <div class="award-card">
+        <div class="award-icon gold"><i class="fa-solid fa-trophy"></i></div>
+        <div>
+          <div class="award-year">2023</div>
+          <div class="award-title">Best Student Article for Global Impact</div>
+          <div class="award-org">MEMS Division — ASME IMECE 2023</div>
+          <div class="award-desc">Awarded for the paper on DEP-assisted cancer cell separation using curved contraction-expansion microchannels. New Orleans, Louisiana.</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-icon maroon"><i class="fa-solid fa-industry"></i></div>
+        <div>
+          <div class="award-year">2024</div>
+          <div class="award-title">High-NA EUV Internship — Intel D1X Fab</div>
+          <div class="award-org">ASML · Hillsboro, Oregon</div>
+          <div class="award-desc">Selected to work on ASML's most advanced High-NA EUV machine during install and qualification at Intel's cutting-edge D1X fabrication facility — direct experience with the world's most advanced lithography tool.</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-icon blue"><i class="fa-solid fa-chalkboard-teacher"></i></div>
+        <div>
+          <div class="award-year">2023–2024</div>
+          <div class="award-title">Graduate Teaching Assistant</div>
+          <div class="award-org">Washington State University Vancouver</div>
+          <div class="award-desc">Assisted instruction across multiple ME courses, conducted problem-solving sessions, and mentored undergraduate students in numerical simulation using COMSOL.</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-icon teal"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div class="award-year">Jun–Aug 2024</div>
+          <div class="award-title">NSF REU Coordinator &amp; Trainer</div>
+          <div class="award-org">NSF Research Experience for Undergraduates · WSU Vancouver</div>
+          <div class="award-desc">Served as trainer and project coordinator for NSF-funded REU program. Provided training on COMSOL simulation + ML model training for microfluidic device design.</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-icon gold"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <div class="award-year">2021</div>
+          <div class="award-title">Top 10% of Graduating Class</div>
+          <div class="award-org">Islamic University of Technology — CGPA: 3.77/4.00</div>
+          <div class="award-desc">Graduated in the top decile with 3 journal publications completed during undergraduate studies, with first-author papers in Elsevier and ASME journals.</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-icon blue"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div>
+          <div class="award-year">2023–2026</div>
+          <div class="award-title">Reviewer &amp; Revising Author</div>
+          <div class="award-org">ASME MSEC 2026 · TSM 2026 · Multiple Journals</div>
+          <div class="award-desc">Drafted full reviewer response documents for MSEC 2026 revision. Submitted conference abstracts to TSM 2026 semiconductor industry conference. Participated in peer review process.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,.5)">
+      Open to collaborations, visiting researcher opportunities, and faculty position discussions.
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>tanbirsarowar@iut-dhaka.edu</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+1 (564) 227-7174</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>PMI Lab, Texas A&amp;M University<br/>College Station, TX 77843</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>J. Mike Walker '66 Dept. of Mechanical Engineering<br/>Texas A&amp;M University</span>
+        </div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/mdtanbirsarowar" class="social-link" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://scholar.google.com/mdtanbirsarowar" class="social-link" title="Google Scholar" target="_blank"><i class="fa-brands fa-google-scholar"></i></a>
+          <a href="https://github.com/tanbirsarowar" class="social-link" title="GitHub" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:tanbirsarowar@iut-dhaka.edu" class="social-link" title="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="collab-note">
+        <h4><i class="fa-solid fa-handshake" style="margin-right:8px;"></i>Looking for Collaborations</h4>
+        <p>
+          I am actively seeking opportunities in the following areas:
+        </p>
+        <ul style="margin-top:12px;padding-left:20px;font-size:.88rem;line-height:2;color:rgba(255,255,255,.7);">
+          <li>Faculty positions in Mechanical Engineering, Precision Metrology, or MEMS</li>
+          <li>Collaborative research in semiconductor metrology and advanced packaging</li>
+          <li>Industry partnerships for in-line wafer inspection tool development</li>
+          <li>Postdoctoral research in optics, FSI simulation, or semiconductor process control</li>
+        </ul>
+        <p style="margin-top:16px;font-size:.82rem;color:rgba(255,255,255,.5);">
+          Advised by <strong style="color:rgba(255,255,255,.75)">Prof. ChaBum Lee</strong> · cblee@tamu.edu<br/>
+          PMI Group · Texas A&amp;M University
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <p>© 2026 Tanbir Sarowar · PhD Candidate, Texas A&amp;M University · Built for GitHub Pages</p>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════ -->
+<script>
+  // Mobile nav toggle
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '60px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(13,27,42,.98)';
+    links.style.padding = '16px 24px 24px';
+    links.style.gap = '16px';
+  }
+
+  // Nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--gold-light)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -40% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Animate numbers in stats on hero visibility
+  function animateNumber(el, target, suffix) {
+    let start = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { el.textContent = target + suffix; clearInterval(timer); return; }
+      el.textContent = Math.floor(start) + suffix;
+    }, 30);
+  }
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.project-card, .timeline-card, .award-card, .skill-category');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  faders.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    fadeObserver.observe(el);
+  });
+
+  // Smooth scroll for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
